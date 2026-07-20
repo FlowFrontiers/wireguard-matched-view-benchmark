@@ -1,0 +1,70 @@
+neural:
+  framework: pytorch
+  primary_prefix_length: 50
+  maximum_prefix_length: 80
+  channels: [direction, size, iat_ms]
+  loss: weighted_cross_entropy
+  optimizer:
+    name: adamw
+    betas: [0.9, 0.999]
+    epsilon: 0.00000001
+    amsgrad: false
+    weight_decay: 0.0001
+    gradient_clip_norm: 1.0
+  training:
+    maximum_epochs: 60
+    early_stopping_metric: macro_f1
+    early_stopping_patience: 6
+    early_stopping_min_delta: 0.0
+    scheduler: reduce_lr_on_plateau
+    scheduler_metric: validation_loss
+    scheduler_factor: 0.5
+    scheduler_patience: 3
+    scheduler_threshold: 0.0001
+    scheduler_threshold_mode: rel
+    scheduler_cooldown: 0
+    scheduler_epsilon: 0.00000001
+    minimum_learning_rate: 0.000001
+    deterministic_algorithms: true
+    mixed_precision: false
+    training_shuffle: true
+    drop_last: false
+    data_loader_workers: 0
+  development:
+    fold: 1
+    train_domain: inner
+    seed: 42
+    selection_metric: macro_f1
+    maximum_trials: 12
+    output_root: outputs/tuning
+  topologies:
+    cnn1d:
+      kernels: [3, 7, 11]
+      residual_blocks: 1
+      residual_kernel: 3
+      activation: gelu
+      pooling: masked_mean
+    lstm:
+      layers: 2
+      bidirectional: false
+      pooling: masked_mean
+    transformer:
+      layers: 2
+      attention_heads: 4
+      feedforward_multiplier: 4
+      activation: gelu
+      norm_first: true
+      pooling: masked_mean
+  trials:
+    - {id: 1, learning_rate: 0.001, batch_size: 512, dropout: 0.20, width: 64}
+    - {id: 2, learning_rate: 0.0003, batch_size: 512, dropout: 0.20, width: 64}
+    - {id: 3, learning_rate: 0.001, batch_size: 1024, dropout: 0.20, width: 64}
+    - {id: 4, learning_rate: 0.001, batch_size: 512, dropout: 0.40, width: 64}
+    - {id: 5, learning_rate: 0.001, batch_size: 512, dropout: 0.20, width: 128}
+    - {id: 6, learning_rate: 0.0003, batch_size: 1024, dropout: 0.20, width: 64}
+    - {id: 7, learning_rate: 0.0003, batch_size: 512, dropout: 0.40, width: 64}
+    - {id: 8, learning_rate: 0.0003, batch_size: 512, dropout: 0.20, width: 128}
+    - {id: 9, learning_rate: 0.001, batch_size: 1024, dropout: 0.40, width: 128}
+    - {id: 10, learning_rate: 0.0003, batch_size: 1024, dropout: 0.40, width: 128}
+    - {id: 11, learning_rate: 0.0001, batch_size: 512, dropout: 0.30, width: 96}
+    - {id: 12, learning_rate: 0.0008, batch_size: 1024, dropout: 0.40, width: 128}

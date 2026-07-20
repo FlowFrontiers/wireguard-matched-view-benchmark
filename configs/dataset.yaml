@@ -1,0 +1,20 @@
+dataset:
+  input_root: data/raw
+  sessions:
+    1:
+      flows: session1/session1_flows.parquet
+      packet_matches: session1/session1_packet_matches.parquet
+    2:
+      flows: session2/session2_flows.parquet
+      packet_matches: session2/session2_packet_matches.parquet
+  output_dir: data/processed
+  minimum_class_support: 200
+  maximum_prefix_length: 80
+  packet_batch_size: 500000
+  aggregation_partitions: 64
+  assignment_padding_ms: 2000.0
+
+splits:
+  folds: 5
+  validation_fraction: 0.10
+  random_seed: 42

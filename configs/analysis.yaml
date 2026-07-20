@@ -1,0 +1,24 @@
+analysis:
+  protocol: analysis
+  primary_config_path: configs/primary.yaml
+  cross_session_config_path: configs/cross_session.yaml
+  dann_config_path: configs/dann.yaml
+  ablation_prefix_config_path: configs/ablation_prefix.yaml
+  ablation_channels_config_path: configs/ablation_channels.yaml
+  contract_audit_path: data/processed/analysis_contract_audit.json
+  output_root: outputs/analysis
+  metrics:
+    - accuracy
+    - balanced_accuracy
+    - macro_f1
+    - weighted_f1
+    - macro_ovr_average_precision
+  primary_metrics: [balanced_accuracy, macro_f1]
+  neural_seed_policy: mean_class_probabilities
+  seed_dispersion: separate
+  bootstrap:
+    resampling_unit: pair_id
+    paired_views: true
+    replicates: 1000
+    confidence_level: 0.95
+    seed: 42

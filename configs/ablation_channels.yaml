@@ -1,0 +1,23 @@
+ablation:
+  kind: channels
+  protocol: ablation_channels
+  primary_config_path: configs/primary.yaml
+  neural_config_path: configs/neural.yaml
+  contract_audit_path: data/processed/ablation_channels_contract_audit.json
+  output_root: outputs/ablations/channels
+  models: [cnn1d, transformer]
+  folds: [1, 2, 3, 4, 5]
+  seed: 42
+  train_domain: inner
+  test_domains: [inner, outer]
+  prefix_length: 50
+  channel_combinations:
+    - {id: direction, channels: [direction]}
+    - {id: direction_size, channels: [direction, size]}
+    - {id: direction_timing, channels: [direction, iat_ms]}
+    - {id: size_timing, channels: [size, iat_ms]}
+    - {id: all, channels: [direction, size, iat_ms]}
+  primary_reference_channel_id: all
+  primary_reference_seed: 42
+  primary_reference_policy: reuse_without_retraining
+  augmentation: false

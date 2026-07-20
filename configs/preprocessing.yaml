@@ -1,0 +1,12 @@
+preprocessing:
+  canonical_path: data/processed/canonical_pairs.parquet
+  split_path: data/processed/split_manifest.csv
+  dataset_manifest_path: data/processed/dataset_manifest.json
+  audit_output: data/processed/preprocessing_audit.json
+  folds: 5
+  prefix_length: 50
+  statistical_representations: [matched_flow_stats, prefix_stats]
+  domains: [inner, outer]
+  imputation: median
+  scaling: none
+  class_weighting: balanced

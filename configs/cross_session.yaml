@@ -1,0 +1,14 @@
+cross_session:
+  protocol: cross_session
+  primary_config_path: configs/primary.yaml
+  split_path: data/processed/cross_session_split_manifest.csv
+  contract_audit_path: data/processed/cross_session_contract_audit.json
+  output_root: outputs/cross_session
+  sessions: [1, 2]
+  validation_fraction: 0.10
+  validation_seed: 2026
+  prefix_length: 50
+  train_domain: inner
+  test_domains: [inner, outer]
+  augmentation: false
+  outer_trained_references: deferred_until_primary_selection

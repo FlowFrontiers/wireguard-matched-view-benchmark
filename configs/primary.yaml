@@ -1,0 +1,89 @@
+experiment:
+  protocol: primary
+  canonical_path: data/processed/canonical_pairs.parquet
+  split_path: data/processed/split_manifest.csv
+  dataset_manifest_path: data/processed/dataset_manifest.json
+  feature_audit_path: data/processed/feature_audit.json
+  preprocessing_audit_path: data/processed/preprocessing_audit.json
+  contract_audit_path: data/processed/experiment_contract_audit.json
+  output_root: outputs/primary
+  folds: [1, 2, 3, 4, 5]
+  prefix_length: 50
+  train_domains: [inner, outer]
+  test_domains: [inner, outer]
+  augmentation: false
+  model_hyperparameters:
+    random_forest:
+      n_estimators: 500
+      criterion: gini
+      max_depth: null
+      min_samples_split: 2
+      min_samples_leaf: 1
+      max_features: sqrt
+      bootstrap: true
+      class_weight: balanced
+      n_jobs: -1
+      random_state: run_seed
+    xgboost:
+      n_estimators: 500
+      max_depth: 6
+      learning_rate: 0.1
+      subsample: 0.8
+      colsample_bytree: 0.8
+      min_child_weight: 1
+      gamma: 0.0
+      reg_alpha: 0.0
+      reg_lambda: 1.0
+      objective: multi:softprob
+      eval_metric: mlogloss
+      tree_method: hist
+      n_jobs: -1
+      random_state: run_seed
+      verbosity: 0
+      sample_weight: balanced
+  configurations:
+    - id: matched_flow_stats__random_forest
+      representation: matched_flow_stats
+      model: random_forest
+      family: classical
+      seeds: [42]
+    - id: matched_flow_stats__xgboost
+      representation: matched_flow_stats
+      model: xgboost
+      family: classical
+      seeds: [42]
+    - id: prefix_stats__random_forest
+      representation: prefix_stats
+      model: random_forest
+      family: classical
+      seeds: [42]
+    - id: prefix_stats__xgboost
+      representation: prefix_stats
+      model: xgboost
+      family: classical
+      seeds: [42]
+    - id: flattened_splt__random_forest
+      representation: flattened_splt
+      model: random_forest
+      family: classical
+      seeds: [42]
+    - id: flattened_splt__xgboost
+      representation: flattened_splt
+      model: xgboost
+      family: classical
+      seeds: [42]
+    - id: sequential_splt__cnn1d
+      representation: sequential_splt
+      model: cnn1d
+      family: neural
+      seeds: [42, 43, 44]
+    - id: sequential_splt__lstm
+      representation: sequential_splt
+      model: lstm
+      family: neural
+      seeds: [42, 43, 44]
+    - id: sequential_splt__transformer
+      representation: sequential_splt
+      model: transformer
+      family: neural
+      seeds: [42, 43, 44]

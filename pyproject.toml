@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wireguard-matched-view-benchmark"
+version = "0.1.0"
+description = "Flow-disjoint matched-view benchmark for WireGuard traffic classification"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Yasameen Sajid Razooqi" },
+  { name = "Adrian Pekar" },
+]
+dependencies = [
+  "numpy>=2.0,<3",
+  "pandas>=2.2,<3",
+  "pyarrow>=17,<24",
+  "PyYAML>=6,<7",
+  "scikit-learn>=1.5,<2",
+]
+
+[project.optional-dependencies]
+classical = [
+  "xgboost>=3,<4",
+]
+neural = [
+  "torch>=2.5,<3",
+]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+vpncat-build-dataset = "vpncat.cli:build_main"
+vpncat-validate-dataset = "vpncat.cli:validate_main"
+vpncat-audit-features = "vpncat.cli:audit_features_main"
+vpncat-audit-preprocessing = "vpncat.cli:audit_preprocessing_main"
+vpncat-audit-experiment-contract = "vpncat.cli:audit_experiment_contract_main"
+vpncat-run-primary-classical = "vpncat.cli:run_primary_classical_main"
+vpncat-tune-neural = "vpncat.cli:tune_neural_main"
+vpncat-run-primary-neural = "vpncat.cli:run_primary_neural_main"
+vpncat-primary-matrix = "vpncat.cli:primary_matrix_main"
+vpncat-cross-session-contract = "vpncat.cli:cross_session_contract_main"
+vpncat-audit-cross-session-preprocessing = "vpncat.cli:cross_session_preprocessing_main"
+vpncat-run-cross-session-classical = "vpncat.cli:run_cross_session_classical_main"
+vpncat-run-cross-session-neural = "vpncat.cli:run_cross_session_neural_main"
+vpncat-cross-session-matrix = "vpncat.cli:cross_session_matrix_main"
+vpncat-dann-contract = "vpncat.cli:dann_contract_main"
+vpncat-run-dann = "vpncat.cli:run_dann_main"
+vpncat-dann-matrix = "vpncat.cli:dann_matrix_main"
+vpncat-ablation-contract = "vpncat.cli:ablation_contract_main"
+vpncat-run-ablation = "vpncat.cli:run_ablation_main"
+vpncat-ablation-matrix = "vpncat.cli:ablation_matrix_main"
+vpncat-analysis-contract = "vpncat.cli:analysis_contract_main"
+vpncat-aggregate-results = "vpncat.cli:aggregate_results_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

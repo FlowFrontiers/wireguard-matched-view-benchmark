@@ -1,0 +1,18 @@
+ablation:
+  kind: prefix_length
+  protocol: ablation_prefix
+  primary_config_path: configs/primary.yaml
+  neural_config_path: configs/neural.yaml
+  contract_audit_path: data/processed/ablation_prefix_contract_audit.json
+  output_root: outputs/ablations/prefix
+  models: [cnn1d, transformer]
+  folds: [1, 2, 3, 4, 5]
+  seed: 42
+  train_domain: inner
+  test_domains: [inner, outer]
+  prefix_lengths: [10, 20, 50, 80]
+  channels: [direction, size, iat_ms]
+  primary_reference_prefix_length: 50
+  primary_reference_seed: 42
+  primary_reference_policy: reuse_without_retraining
+  augmentation: false

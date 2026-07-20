@@ -1,0 +1,10 @@
+cross_session_preprocessing:
+  cross_session_config_path: configs/cross_session.yaml
+  audit_output: data/processed/cross_session_preprocessing_audit.json
+  prefix_length: 50
+  statistical_representations: [matched_flow_stats, prefix_stats]
+  fit_domain: inner
+  transform_domains: [inner, outer]
+  imputation: median
+  scaling: none
+  class_weighting: balanced

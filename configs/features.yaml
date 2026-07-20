@@ -1,0 +1,7 @@
+features:
+  canonical_path: data/processed/canonical_pairs.parquet
+  audit_output: data/processed/feature_audit.json
+  primary_prefix_length: 50
+  available_prefix_lengths: [10, 20, 50, 80]
+  sequence_channels: [direction, size, iat_ms]
+  log_transform_magnitudes: true

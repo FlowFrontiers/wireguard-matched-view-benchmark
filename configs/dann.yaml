@@ -1,0 +1,35 @@
+dann:
+  protocol: dann
+  primary_config_path: configs/primary.yaml
+  neural_config_path: configs/neural.yaml
+  contract_audit_path: data/processed/dann_contract_audit.json
+  output_root: outputs/dann
+  representation: sequential_splt
+  model: dann_cnn1d
+  backbone: cnn1d
+  folds: [1, 2, 3, 4, 5]
+  seeds: [42, 43, 44]
+  prefix_length: 50
+  channels: [direction, size, iat_ms]
+  source_domain: inner
+  adaptation_domain: outer
+  test_domains: [inner, outer]
+  adaptation_pairs: source_training_pairs_only
+  adaptation_labels: prohibited
+  validation_domain: inner
+  validation_role: validation
+  source_loss: weighted_cross_entropy
+  domain_loss: binary_cross_entropy_logits
+  domain_loss_weight: 1.0
+  domain_batching: paired_by_pair_id
+  gradient_reversal:
+    schedule: logistic
+    gamma: 10.0
+    start: 0.0
+    end: 1.0
+  domain_head:
+    hidden_layers: 1
+    hidden_width: backbone_width
+    activation: gelu
+    dropout: selected_backbone_dropout
+  augmentation: false
