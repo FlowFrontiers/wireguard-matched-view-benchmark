@@ -1,0 +1,30 @@
+{
+  "class_order": [
+    "Chat",
+    "Cloud",
+    "Collaborative",
+    "ConnCheck",
+    "Database",
+    "Download",
+    "Email",
+    "Network",
+    "SocialNetwork",
+    "SoftwareUpdate",
+    "System",
+    "Unspecified",
+    "VoIP",
+    "Web"
+  ],
+  "derivation": "outer-view confusion counts over probability-ensemble predictions; rows normalized by true-category support",
+  "evidence_artifact": {
+    "selected_confusions.csv": "156239067fe5e7e8927910778617aad5af31758850f841c4d667d2c88d5ff55e"
+  },
+  "row_count": 588,
+  "schema_version": 1,
+  "source_predictions": {
+    "predictions/primary__flattened_splt__xgboost__train_inner.parquet": "09defdb1ef702d2b282a6ade19dda94bb659d9fcbe28f008392c6b3c91ec8656",
+    "predictions/primary__matched_flow_stats__xgboost__train_inner.parquet": "0ef92ae7abb5c9adf931af64fafe9c58bc17269fd984139ff729aef80f507abf",
+    "predictions/primary__sequential_splt__cnn1d__train_inner.parquet": "1e4386f6ca2eb715413edc2e3aff92d5530b4436f57d8b576aea34db8351bffe"
+  },
+  "status": "complete"
+}

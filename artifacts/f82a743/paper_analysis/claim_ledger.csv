@@ -1,0 +1,13 @@
+claim_id,claim_type,approved_claim,evidence,language
+C01,design,Primary folds are disjoint by physical pair_id.,source analysis contract,strong
+C02,design,Each trained model is evaluated on both views of the same held-out pairs.,primary_2x2_metrics.csv,strong
+C03,result,Transfer robustness depends jointly on representation and model family.,primary_transfer_gaps.csv,empirical
+C04,result,CNN1D has the smallest absolute forward-transfer loss among evaluated configurations.,primary_transfer_gaps.csv,empirical
+C05,result,Flattened SPLT with classical models transfers less robustly than the evaluated sequence-aware configurations.,primary_transfer_gaps.csv,empirical
+C06,result,Cross-session performance differs by session direction.,cross_session_by_direction.csv,empirical
+C07,result,DANN modestly improves outer-view CNN1D performance over source-only training.,dann_comparison.csv,empirical
+C08,result,DANN remains below the supervised outer-trained CNN1D reference.,dann_comparison.csv,empirical
+C09,result,Short packet prefixes retain substantial transferable signal.,prefix_ablation.csv,cautious
+C10,result,Size and timing retain strong signal without direction in this benchmark.,channel_ablation.csv,cautious
+C11,scope,Ablations use one frozen seed per fold and are sensitivity analyses.,prefix_ablation.csv; channel_ablation.csv,strong
+C12,scope,"Results are bounded to this WireGuard dataset, site, endpoint, and two sessions.",dataset publication; paper limitations,strong

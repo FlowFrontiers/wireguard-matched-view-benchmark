@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "encapsulation_diagnostics.csv": 26,
+    "per_class_diagnostics.csv": 23,
+    "seed_pair_diagnostics.csv": 3
+  },
+  "created_utc": "2026-07-21T08:47:28.568598+00:00",
+  "evidence_artifacts": {
+    "encapsulation_diagnostics.csv": "d692c30b97f82e49db16bc7f305e5186d61770925775a318a8433bdc4a8981ec",
+    "per_class_diagnostics.csv": "99bd6cef139d0d2939e527c815138ad9211a2007b23b0bfecf36e823070bfb9d",
+    "seed_pair_diagnostics.csv": "93fed80556d6b05a6dbd2909a67ef9f7f55f844f70951b9316c6df76137b2b33"
+  },
+  "generation_git": {
+    "dirty": false,
+    "revision": "d08e305f1d4feefea6afe0373cff19f4c115748a",
+    "status_available": true
+  },
+  "schema_version": 1,
+  "source_artifacts": {
+    "canonical_pairs.parquet": "ca51e8447717224737a86aa24fc5ac889f39b3cb404fbc89fdec58db8cd83e1e",
+    "dataset_manifest.json": "523313cf9581489f92a9906d9d9890a62c0110e516c06ea2f90ce2f77b179af4",
+    "per_class_metrics.csv": "a602e07c2863182ba153bd8b7c2dac507164bef36bb47aa29a5284bf0674a749",
+    "seed_metrics.csv": "d3b868cc39b3068b59ec0a60aabce2a75346dd3aca0febaa2599fb3e195dbd9f"
+  },
+  "status": "complete"
+}

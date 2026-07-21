@@ -1,0 +1,63 @@
+{
+  "cluster_counts": {
+    "1": {
+      "1": 49,
+      "2": 33
+    },
+    "2": {
+      "1": 25,
+      "2": 17
+    }
+  },
+  "counts": {
+    "interval_rows": 64,
+    "method_comparisons": 7,
+    "primary_groups": 9,
+    "retained_pairs": 226281
+  },
+  "inputs": {
+    "analysis_manifest": "f1c151596ba6b31fe05512e92733e4f07aa12c2dfec67a3bdf44f961f192cb68",
+    "canonical_pairs": "ca51e8447717224737a86aa24fc5ac889f39b3cb404fbc89fdec58db8cd83e1e",
+    "dataset_manifest": "523313cf9581489f92a9906d9d9890a62c0110e516c06ea2f90ce2f77b179af4",
+    "flow_artifacts": {
+      "1": "9d9420befaa47016cdf5867bf99bd28263af7fa1ccba4eb0228b5c388ed6758b",
+      "2": "457c462e1caf0e62deab35438280e39a33f91e0648796de8e486ec19f7f1edd9"
+    },
+    "method_paper_reference": "9633a7492d7d521d1fd535106ea0b9da75f1875ccf2c378bf6b3f4963e6dfe03",
+    "prediction_artifacts": {
+      "dann__sequential_splt__dann_cnn1d": "4072ce934f3e0e791e32ac7b4f9d688e90db6e275bc4bdfa7823b37f678d573a",
+      "primary__flattened_splt__random_forest__train_inner": "23af7fa3088d62d33c0ff2ae17d96f0924c75e7c836167c76fed61456ec9399a",
+      "primary__flattened_splt__xgboost__train_inner": "09defdb1ef702d2b282a6ade19dda94bb659d9fcbe28f008392c6b3c91ec8656",
+      "primary__matched_flow_stats__random_forest__train_inner": "4d21394f9433d66cce07625fc24f645a421b4041d7dc2d092e37376c259c1f5f",
+      "primary__matched_flow_stats__xgboost__train_inner": "0ef92ae7abb5c9adf931af64fafe9c58bc17269fd984139ff729aef80f507abf",
+      "primary__prefix_stats__random_forest__train_inner": "f63f2d68174ee747a13d981b1cdc699b03032de2039f865d9955bca29ac500c0",
+      "primary__prefix_stats__xgboost__train_inner": "ee032ac95a5f2c7b432af47d76813a8d5d88088295fc4a43e780b7eb78c3b71c",
+      "primary__sequential_splt__cnn1d__train_inner": "1e4386f6ca2eb715413edc2e3aff92d5530b4436f57d8b576aea34db8351bffe",
+      "primary__sequential_splt__cnn1d__train_outer": "392fd221b59990de3e95c6a60ef9c3f66e0203ebdda9acc90e37f67dbb03cd8a",
+      "primary__sequential_splt__lstm__train_inner": "dba8e6ef20241a37274fe2def08e9b7a8e5bb894574b8f439d8ef902823145ac",
+      "primary__sequential_splt__transformer__train_inner": "7b07cde84fc31163f1f699078536d727e91180c47dc80253400e0dd101fdbd20"
+    },
+    "primary_paper_reference": "7833defabf76d8ed6a40f75518bc94aa34c84a347880066303d08bb7b2aa0ab2"
+  },
+  "outputs": {
+    "temporal_block_intervals.csv": {
+      "rows": 64,
+      "sha256": "576f87f9a1c63e506d76326a929baf57271fd2eda5ec5a2dba17313f240fd4a1"
+    }
+  },
+  "policy": {
+    "block_hours": [
+      1,
+      2
+    ],
+    "conditioning": "fitted prediction ensembles",
+    "confidence_level": 0.95,
+    "flow_assignment": "bidirectional_first_seen_ms",
+    "replicates": 1000,
+    "resampling_unit": "nonoverlapping_time_block",
+    "seed": 42,
+    "sessions_resampled_separately": true
+  },
+  "schema_version": 1,
+  "status": "complete"
+}

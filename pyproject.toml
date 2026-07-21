@@ -19,6 +19,7 @@ dependencies = [
   "pyarrow>=17,<24",
   "PyYAML>=6,<7",
   "scikit-learn>=1.5,<2",
+  "matplotlib==3.11.1",
 ]
 
 [project.optional-dependencies]
@@ -56,6 +57,10 @@ vpncat-run-ablation = "vpncat.cli:run_ablation_main"
 vpncat-ablation-matrix = "vpncat.cli:ablation_matrix_main"
 vpncat-analysis-contract = "vpncat.cli:analysis_contract_main"
 vpncat-aggregate-results = "vpncat.cli:aggregate_results_main"
+vpncat-paper-analysis = "vpncat.cli:paper_analysis_main"
+vpncat-paper-diagnostics = "vpncat.cli:paper_diagnostics_main"
+vpncat-paper-render = "vpncat.cli:paper_render_main"
+vpncat-paper-validate = "vpncat.cli:paper_validate_main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

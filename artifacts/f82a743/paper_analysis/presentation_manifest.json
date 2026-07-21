@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-07-21T09:17:10.173590+00:00",
+  "evidence_manifest_sha256": "2b6b01da24d83e86331e485f0bab4c8c59b460cd3f5d5a6d5d4b3e1c051de90c",
+  "generation_environment": {
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.1",
+    "pandas": "2.3.3",
+    "pyarrow": "23.0.1",
+    "scikit-learn": "1.9.0"
+  },
+  "generation_git": {
+    "dirty": false,
+    "revision": "06aed2d8d63e82c535792c7f36f11dda3e13fd37",
+    "status_available": true
+  },
+  "package_version": "0.1.0",
+  "presentation_artifacts": {
+    "figures/channel_ablation.pdf": "9b7ef085c21e92963d50a584f18c665591f7e1dc4757e98551bcc95d4cdbbea6",
+    "figures/class_distribution.pdf": "1151c84994af79ae93356203b99e50f00897353566afe6ba9e63b72e9861cb28",
+    "figures/cross_session_directions.pdf": "110c40a9026f4aa687f891c10bcfc5cf541a8e7ea97062877d026adfa0f8e482",
+    "figures/encapsulation_ordering.pdf": "0cc3c90a3d16173c7dd3b43234949a6a18da6801124f48065a921ef4aea02052",
+    "figures/encapsulation_padding.pdf": "13ffbb0027eed5cf8175a34695dcbfd7be2bfc4d0199b67361fa292ab330d0c8",
+    "figures/encapsulation_timing.pdf": "0b066f2d58bcd0e839b5ae6de9f0607f10e7417c66e938a8b702ed1fcb036212",
+    "figures/per_class_f1.pdf": "731132b33c6309d339d62884d4ca9497d788cc7a4fb3bf3dfe1fabfc78f986d2",
+    "figures/per_class_model_heatmap.pdf": "38ef63e7b038f4a32984c176d43b7b914ef443f82373327cb3e571f446e930e6",
+    "figures/per_class_transfer_change.pdf": "f78630266e11dc15ed2118780d5e7e79b33254c437297d16b9abdb8b41792c88",
+    "figures/prefix_ablation.pdf": "b54aa0bb3a21c5dc82bbbde740ff6d8f93a9d698e226955cecda541fee62272b",
+    "figures/seed_dispersion.pdf": "b42bb0adef4a555ca65f16576156a0ec73f628029d71d01e00eebe125877902a",
+    "figures/selected_confusions.pdf": "39dc892821bf99c5b44274b60fe9f8a8cdc5c7529e4050370c49127d22a50182",
+    "figures/transfer_direction_asymmetry.pdf": "bb25c1af2497590b852ff0753b3bfe61d886358515549234ea05cd947ce54fec",
+    "figures/transfer_gaps.pdf": "28575019aea0f3ab8d13035f0426aa4cb42fc44f99e4436ed3a518a8ab43e2f8",
+    "latex/results_macros.tex": "e5954f62aa79a16fd47ef0d394672e63893659079ddd459c45f315aac9f83e33",
+    "tables/cross_session.tex": "9e26107559194ffa037f43d9ff75176593b56b1d35f1d9244656692df4c36e54",
+    "tables/dann_comparison.tex": "196361ef28b6e024378eb1c4aea8dc1c5b64be2c7b4454e7f6d2b6ce81ccc30a",
+    "tables/primary_2x2.tex": "076450a46b41d54157acd3cf59053a2f8362ebbec1a84ea94bd9c7fd4e1d3c16",
+    "tables/primary_forward.tex": "ad390762abf39ced89c2335cc9a57042f0f710cab16c73c18287e0147dac860c"
+  },
+  "schema_version": 1,
+  "status": "complete"
+}

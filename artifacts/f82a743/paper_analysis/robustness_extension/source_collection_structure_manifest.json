@@ -1,0 +1,75 @@
+{
+  "block_hours": [
+    1,
+    2
+  ],
+  "counts": {
+    "confidence_nonmissing": 226281,
+    "excluded_below_support": 140,
+    "excluded_categories": 6,
+    "guessed_flag_nonmissing": 226281,
+    "nonempty_sni": 104194,
+    "nonempty_sni_share": 0.4604628758048621,
+    "retained_pairs": 226281,
+    "sessions": {
+      "1": 122893,
+      "2": 103388
+    },
+    "unique_remote_ip_ports": 8132,
+    "unique_remote_ips": 6850
+  },
+  "inputs": {
+    "canonical_pairs": {
+      "sha256": "ca51e8447717224737a86aa24fc5ac889f39b3cb404fbc89fdec58db8cd83e1e"
+    },
+    "cross_session_split": {
+      "sha256": "f676bfa2dcf0b0796474e8be265c8bfa61241e1fce1b4ba19922c650a12d1b59"
+    },
+    "dataset_manifest": {
+      "sha256": "523313cf9581489f92a9906d9d9890a62c0110e516c06ea2f90ce2f77b179af4"
+    },
+    "primary_split": {
+      "sha256": "6368917747004d47d10aa3f5edec5ab460c7706bd6e8c29c7ada5ab0d32b20a9"
+    },
+    "session_1_flows": {
+      "sha256": "9d9420befaa47016cdf5867bf99bd28263af7fa1ccba4eb0228b5c388ed6758b"
+    },
+    "session_2_flows": {
+      "sha256": "457c462e1caf0e62deab35438280e39a33f91e0648796de8e486ec19f7f1edd9"
+    }
+  },
+  "local_inner_ip": "10.14.0.2",
+  "notes": {
+    "confidence_codes": "raw released nDPI codes; semantic names are intentionally not inferred",
+    "endpoint_orientation": "remote endpoint is the non-local side, not unconditionally dst_ip",
+    "overlap_source": "only role=train pairs are endpoint-exposure sources; validation is excluded",
+    "time_block_assignment": "flow assigned by bidirectional_first_seen_ms"
+  },
+  "outputs": {
+    "endpoint_concentration.csv": {
+      "rows": 14,
+      "sha256": "663ca71dd944828593c24957e987ae135b05049625f4fc996823ba1540586344"
+    },
+    "endpoint_overlap.csv": {
+      "rows": 14,
+      "sha256": "4410c764e7c042aea7fadb1abe089529b4cfde91298b7bd290c7468589408fe7"
+    },
+    "excluded_categories.csv": {
+      "rows": 6,
+      "sha256": "9adb3f03407fc7827a6a0c8a9755e89f14f500ea0a914090f3d157071d254303"
+    },
+    "label_confidence.csv": {
+      "rows": 8,
+      "sha256": "4c64441f92a48d65f03937f17fcc46dca5a1febf224301330f714b373bc88bb9"
+    },
+    "temporal_block_summary.csv": {
+      "rows": 4,
+      "sha256": "d7cd707371fb6743f3c0f200408f2367236b7254a80edd187085a7c1a23a705a"
+    },
+    "temporal_category_coverage.csv": {
+      "rows": 56,
+      "sha256": "d9b7f54a2043f7f037caa7f0a883d7c846471562355e54fc8203d6d247e78978"
+    }
+  },
+  "schema_version": 1
+}

@@ -777,3 +777,117 @@ def aggregate_results_main(argv: Sequence[str] | None = None) -> None:
     )
     output = aggregate_results(config)
     print(json.dumps({"status": "complete", "output": str(output)}, indent=2))
+
+
+def paper_analysis_main(argv: Sequence[str] | None = None) -> None:
+    from vpncat.paper_analysis import load_paper_analysis_config
+    from vpncat.paper_bundle import build_bundle_from_predictions, validate_bundle_full
+
+    parser = argparse.ArgumentParser(
+        description="Build or validate manuscript artifacts from frozen campaign predictions"
+    )
+    parser.add_argument("--config", type=Path, default=Path("configs/paper_analysis.yaml"))
+    parser.add_argument("--source-analysis-root", type=Path)
+    parser.add_argument("--output-root", type=Path)
+    parser.add_argument("--validate", action="store_true")
+    parser.add_argument(
+        "--allow-dirty",
+        action="store_true",
+        help="Allow an explicitly marked dirty-tree preview; never use for a release bundle",
+    )
+    args = parser.parse_args(argv)
+    config = load_paper_analysis_config(
+        args.config,
+        source_analysis_root=args.source_analysis_root,
+        output_root=args.output_root,
+    )
+    if args.validate:
+        report = validate_bundle_full(
+            config.output_root,
+            config=config,
+            allow_dirty=args.allow_dirty,
+        )
+    else:
+        output = build_bundle_from_predictions(config, allow_dirty=args.allow_dirty)
+        report = {"status": "complete", "output": str(output)}
+    print(json.dumps(report, indent=2, sort_keys=True))
+
+
+def paper_diagnostics_main(argv: Sequence[str] | None = None) -> None:
+    from vpncat.paper_analysis import load_paper_analysis_config
+    from vpncat.paper_bundle import extend_diagnostic_evidence
+
+    parser = argparse.ArgumentParser(
+        description="Add canonical, per-class, and seed diagnostics to the paper bundle"
+    )
+    parser.add_argument("--config", type=Path, default=Path("configs/paper_analysis.yaml"))
+    parser.add_argument(
+        "--canonical-path",
+        type=Path,
+        default=Path("data/processed/canonical_pairs.parquet"),
+    )
+    parser.add_argument(
+        "--dataset-manifest-path",
+        type=Path,
+        default=Path("data/processed/dataset_manifest.json"),
+    )
+    parser.add_argument(
+        "--seed-metrics-path",
+        type=Path,
+        required=True,
+        help="Frozen f82a743 outputs/analysis/seed_metrics.csv",
+    )
+    parser.add_argument("--allow-dirty", action="store_true")
+    parser.add_argument("--force", action="store_true")
+    args = parser.parse_args(argv)
+    config = load_paper_analysis_config(args.config)
+    output = extend_diagnostic_evidence(
+        config,
+        canonical_path=args.canonical_path,
+        dataset_manifest_path=args.dataset_manifest_path,
+        seed_metrics_path=args.seed_metrics_path,
+        allow_dirty=args.allow_dirty,
+        force=args.force,
+    )
+    print(json.dumps({"output": str(output)}, indent=2, sort_keys=True))
+
+
+def paper_render_main(argv: Sequence[str] | None = None) -> None:
+    from vpncat.paper_analysis import load_paper_analysis_config
+    from vpncat.paper_bundle import render_presentation
+
+    parser = argparse.ArgumentParser(
+        description="Regenerate paper figures, tables, and macros from frozen evidence CSVs"
+    )
+    parser.add_argument("--config", type=Path, default=Path("configs/paper_analysis.yaml"))
+    parser.add_argument("--bundle-root", type=Path)
+    args = parser.parse_args(argv)
+    config = load_paper_analysis_config(args.config)
+    root = args.bundle_root or config.output_root
+    output = render_presentation(root, config=config)
+    print(json.dumps({"status": "complete", "output": str(output)}, indent=2))
+
+
+def paper_validate_main(argv: Sequence[str] | None = None) -> None:
+    from vpncat.paper_analysis import load_paper_analysis_config
+    from vpncat.paper_bundle import validate_bundle_quick
+
+    parser = argparse.ArgumentParser(
+        description="Quickly validate frozen evidence and presentation outputs"
+    )
+    parser.add_argument("--config", type=Path, default=Path("configs/paper_analysis.yaml"))
+    parser.add_argument("--bundle-root", type=Path)
+    parser.add_argument(
+        "--skip-rerender",
+        action="store_true",
+        help="Check schemas and hashes without deterministic presentation regeneration",
+    )
+    args = parser.parse_args(argv)
+    config = load_paper_analysis_config(args.config)
+    root = args.bundle_root or config.output_root
+    report = validate_bundle_quick(
+        root,
+        config=config,
+        rerender=not args.skip_rerender,
+    )
+    print(json.dumps(report, indent=2, sort_keys=True))

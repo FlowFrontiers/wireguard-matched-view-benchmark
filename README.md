@@ -1,12 +1,12 @@
-# WireGuard Matched-View Benchmark
+# Flow-Disjoint Matched-View Benchmarking of WireGuard Application-Category Classification
 
-Reproducible Python pipeline for building the matched-view benchmark, running
-its frozen experiment matrices, and producing the machine-readable results used
-by the accompanying paper. The code operates on paired observations of the
-same physical flows before and after WireGuard encapsulation.
+Reproducibility artifact accompanying the manuscript by Yasameen Sajid
+Razooqi and Adrian Pekar.
 
-This repository contains the journal experiment pipeline. It is separate from
-the frozen conference-paper repository.
+It provides the Python pipeline for building the matched-view benchmark,
+running its frozen experiment matrices, and producing the machine-readable
+results reported in the manuscript. The code operates on paired observations
+of the same physical flows before and after WireGuard encapsulation.
 
 ## What This Repository Runs
 
@@ -26,9 +26,47 @@ The frozen campaign contains 265 unique model trainings after excluding reused
 ablation reference cells. Neural model selection adds 36 development-fold
 trials: 12 each for CNN1D, LSTM, and Transformer.
 
+## Released Evaluation Evidence
+
+The compact, manuscript-facing evidence from the definitive campaign is
+committed under `artifacts/f82a743/paper_analysis/`. It contains aggregate
+metrics, paired-bootstrap intervals, per-class and seed-dispersion analyses,
+cross-session and ablation results, an encapsulation-transformation
+characterization, generated tables and figures, and the manifests and
+validation receipts that bind them to the campaign outputs.
+
+After installation, validate this bundle without downloading the dataset or
+the omitted campaign outputs:
+
+```bash
+vpncat-paper-validate --config configs/paper_analysis.yaml
+```
+
+The repository deliberately omits the canonical/processed dataset, tuning
+artifacts, fitted model checkpoints, per-run prediction Parquets, and aggregate
+per-group prediction Parquets. Together these files are several gigabytes and
+are not required to inspect the reported evidence. They can be regenerated from
+the public dataset by following the ordered commands below. The committed
+`full_validation_receipt.json` records the completed prediction-level audit.
+The evidence manifest and extension receipts additionally bind the confusion,
+encapsulation, per-class, and seed diagnostics to their exact source artifacts.
+
+### Campaign Provenance
+
+The evidence manifests record the original campaign revision
+`f82a74381a2fb97e7e27c6b29ffe0fb61ef3b502`. The public repository uses a clean
+two-commit history rather than retaining intermediate implementation
+milestones. Its annotated tag `f82a743` identifies a campaign-source commit
+whose Git tree is byte-identical to that original revision; both have tree
+SHA-1 `49d99ca41d05779a9f8568c657c304bc0d3b319b`. The different commit SHA is a
+consequence of rewriting the parent history and commit message, not a change to
+the frozen campaign source. The following commit adds the compact evidence,
+paper-analysis layer, diagnostics, and release documentation.
+
 ## Repository Layout
 
 ```text
+artifacts/     Compact validated evidence used by the paper
 configs/       Frozen dataset, feature, model, protocol, and analysis settings
 scripts/       Script equivalents of the installed vpncat-* commands
 src/vpncat/    Dataset, preprocessing, training, orchestration, and analysis code
@@ -63,8 +101,11 @@ pytest
 ruff check .
 ```
 
-The tests use synthetic paired data. They do not train the full experiment
-matrix.
+Install all three extras shown above before collecting the complete test suite;
+the `dev` extra alone does not include PyTorch. Most tests use synthetic paired
+data and do not train the full experiment matrix. Two dataset-dependent
+diagnostic integration tests are skipped until the canonical dataset has been
+built.
 
 ## Reproducibility Rule
 
@@ -286,6 +327,90 @@ outputs/analysis/
 The CSV files are the machine-readable sources for paper tables and figures.
 Aggregation refuses to overwrite an existing analysis directory.
 
+### Build manuscript evidence
+
+The post-campaign paper layer consumes only the validated aggregate predictions;
+it does not load model weights or rerun inference. Point it at an extracted copy
+of the frozen `f82a743` aggregate:
+
+```bash
+vpncat-paper-analysis \
+  --config configs/paper_analysis.yaml \
+  --source-analysis-root /path/to/f82a743/outputs/analysis
+```
+
+This expensive command derives the statistical evidence from predictions. It is
+used only when evidence calculations change or for an optional release audit.
+The committed evidence CSVs and `evidence_manifest.json` are otherwise treated
+as immutable. `full_validation_receipt.json` preserves the prior
+prediction-level validation receipt whose hash is pinned by the evidence
+manifest.
+
+The additive diagnostics use the canonical pair table, existing per-class
+evidence, and the frozen campaign's compact seed-metrics table; they do not
+read model checkpoints or rerun inference:
+
+```bash
+vpncat-paper-diagnostics \
+  --config configs/paper_analysis.yaml \
+  --canonical-path data/processed/canonical_pairs.parquet \
+  --dataset-manifest-path data/processed/dataset_manifest.json \
+  --seed-metrics-path /path/to/f82a743/outputs/analysis/seed_metrics.csv
+```
+
+The command writes compact diagnostic CSVs, preserves the 26-KB seed-metrics
+source table, and emits a receipt that binds them to the canonical dataset and
+existing evidence before refreshing presentation outputs.
+Use `--force` only when deliberately restamping an existing extension.
+
+The endpoint-recurrence summaries and temporal-block sensitivity intervals are
+separate postprocessing steps; neither fits a model or runs inference:
+
+```bash
+python scripts/extract_collection_structure.py \
+  --input-root /path/to/VPN-nonVPN-Dataset/data
+
+python scripts/temporal_block_bootstrap.py \
+  --input-root /path/to/VPN-nonVPN-Dataset/data \
+  --analysis-root /path/to/f82a743/outputs/analysis
+
+python scripts/publish_robustness_extension.py
+```
+
+The first command derives endpoint, support-filtering, label-metadata, and
+temporal-block summaries from the public dataset and frozen split manifests.
+The second resamples one- and two-hour blocks separately within each session
+from the frozen aggregate predictions. The publisher emits the compact
+`robustness_extension/` bundle and a receipt binding its CSVs and macros to both
+upstream manifests.
+
+Normal paper development never reads predictions. Regenerate figures, tables,
+and LaTeX macros directly from the evidence CSVs:
+
+```bash
+vpncat-paper-render --config configs/paper_analysis.yaml
+```
+
+This command also refreshes `presentation_manifest.json`. Figure colors,
+labels, legends, and layouts can therefore be revised without changing or
+restamping statistical evidence. Quick validation checks evidence schemas and
+hashes, presentation inventory, and deterministic rendering:
+
+```bash
+vpncat-paper-validate --config configs/paper_analysis.yaml
+```
+
+The quick path should be used throughout manuscript development and completes
+without loading prediction Parquets. The original prediction-level validation
+remains available as a release-only operation:
+
+```bash
+vpncat-paper-analysis \
+  --config configs/paper_analysis.yaml \
+  --source-analysis-root /path/to/f82a743/outputs/analysis \
+  --validate
+```
+
 ## Run Artifacts
 
 Each trained model publishes one immutable directory containing both inner and
@@ -332,6 +457,19 @@ outputs/analysis/
 - Keep `data/processed/` and `outputs/` on persistent storage during cloud
   execution.
 
+## Licensing
+
+Source code and documentation are released under the MIT License in
+[`LICENSE`](LICENSE). Generated evaluation evidence committed under
+`artifacts/` is released under the Creative Commons Attribution 4.0
+International License (CC BY 4.0), as specified in
+[`artifacts/LICENSE`](artifacts/LICENSE).
+
+The upstream flow and packet-match dataset is not redistributed by this
+repository. It remains subject to the license and attribution requirements of
+its Zenodo release and should be cited through the dataset article and archive
+linked in [Dataset](#dataset).
+
 ## Detailed Reference
 
 See [docs/protocol-reference.md](docs/protocol-reference.md) for feature
@@ -343,12 +481,9 @@ complete option documentation through `--help`.
 
 ## Citation
 
-When publishing results produced by this code, cite the accompanying paper and
-the source dataset:
+When using this benchmark or its results, cite the accompanying manuscript
+identified above and the source dataset. Final publication metadata for the
+manuscript will be added when available. The dataset citation is:
 
 > Razooqi, Y. S., and Pekar, A. (2026). VPN-nonVPN-Dataset (v3.0.0) [Data set].
 > Zenodo. https://doi.org/10.5281/zenodo.18945858
-
-## License
-
-MIT. See [LICENSE](LICENSE).

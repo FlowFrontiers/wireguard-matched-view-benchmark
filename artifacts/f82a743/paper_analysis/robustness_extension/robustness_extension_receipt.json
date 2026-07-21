@@ -1,0 +1,27 @@
+{
+  "counts": {
+    "endpoint_overlap.csv": 14,
+    "excluded_categories.csv": 6,
+    "temporal_block_intervals.csv": 64
+  },
+  "evidence_artifacts": {
+    "endpoint_overlap.csv": "4410c764e7c042aea7fadb1abe089529b4cfde91298b7bd290c7468589408fe7",
+    "excluded_categories.csv": "9adb3f03407fc7827a6a0c8a9755e89f14f500ea0a914090f3d157071d254303",
+    "robustness_macros.tex": "033696352bde02ce23ee3998c09f77f556d8ec17c6cae2d5784c698b8715ac5f",
+    "source_collection_structure_manifest.json": "bc72b4dad9c3ddbaad4ba37f73360c53bf1a6bc2ac0b41141ce46c6394d9f541",
+    "source_temporal_bootstrap_manifest.json": "25399a528821fd7e2d044936e8eeb648126c39204ccef8be5fa9de4ac392015b",
+    "temporal_block_intervals.csv": "576f87f9a1c63e506d76326a929baf57271fd2eda5ec5a2dba17313f240fd4a1"
+  },
+  "generation_git": {
+    "dirty": false,
+    "revision": "ba8407678ca09812e5760fc35e984bbb69b71683",
+    "status_available": true
+  },
+  "schema_version": 1,
+  "scope": "Postprocessing only: endpoint recurrence, support filtering, and time-cluster resampling of frozen predictions; no model fitting or inference",
+  "source_artifacts": {
+    "collection_structure_manifest.json": "bc72b4dad9c3ddbaad4ba37f73360c53bf1a6bc2ac0b41141ce46c6394d9f541",
+    "temporal_bootstrap_manifest.json": "25399a528821fd7e2d044936e8eeb648126c39204ccef8be5fa9de4ac392015b"
+  },
+  "status": "complete"
+}

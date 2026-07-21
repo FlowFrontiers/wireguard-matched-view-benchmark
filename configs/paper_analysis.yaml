@@ -1,0 +1,14 @@
+paper_analysis:
+  protocol: paper_analysis
+  analysis_config_path: configs/analysis.yaml
+  source_analysis_root: outputs/analysis
+  output_root: artifacts/f82a743/paper_analysis
+  expected_campaign_revision: f82a74381a2fb97e7e27c6b29ffe0fb61ef3b502
+  expected_campaign_archive_sha256: 0ab424445029cdf21f4aabeb917148bf8d71992f6b899e569ff89d2d8a4b5553
+  expected_analysis_manifest_sha256: f1c151596ba6b31fe05512e92733e4f07aa12c2dfec67a3bdf44f961f192cb68
+  expected_analysis_contract_sha256: 38b3faa58fdc8217310d9d20122a4d930189ebc7e44ae43e55f3afe32d679e6a
+  bootstrap:
+    resampling_unit: pair_id
+    replicates: 1000
+    confidence_level: 0.95
+    seed: 42
